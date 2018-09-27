@@ -1,0 +1,28 @@
+<div class="bg-login">
+    <div class="bg-smooth"></div>
+    <div class="container-login">
+        <div class="box-login">
+            <div class="top-login text-center">
+                <h3>Administração<br/> <span>Reserva Santana</span></h3>
+            </div>
+            <div class="middle-login">
+                <input type="text" class="form-control" [(ngModel)]="email" placeholder="E-mail">
+                <input type="password" class="form-control" [(ngModel)]="password" placeholder="Senha">
+            </div>
+            <div class="bottom-login">
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-full bg-btn-primary" (click)="signIn()">Logar</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <p class="small-p not-m-bt m-t">
+                            <span (click)="SendResetPassword()" class="link"> Esqueci minha senha </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

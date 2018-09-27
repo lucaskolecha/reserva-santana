@@ -1,1 +1,242 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "src/app/variables";
+@import "@uicapivara/cp-image-crop/dist/cp-image-crop.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~angular-notifier/styles/core.css";
+@import "~angular-notifier/styles/themes/theme-material.css";
+@import "~angular-notifier/styles/types/type-success.css";
+@import "~angular-notifier/styles/types/type-info.css";
+@import "~angular-notifier/styles/types/type-warning.css";
+@import "~angular-notifier/styles/types/type-error.css";
+body,
+html {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0px;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    font-size: 16px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-center {
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+a,
+button,
+input {
+    &:active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    &:focus {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    &:active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+.btn {
+    height: 54px;
+    padding: 0px 20px;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+.btn-sa {
+    background-color: $primaryColor;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: 700;
+    &:hover {
+        background-color: #fff;
+        border: 2px solid $primaryColor;
+        color: $primaryColor;
+    }
+}
+
+.btn-sa-reverse {
+    background-color: #fff;
+    border: 2px solid $primaryColor;
+    color: $primaryColor;
+    font-weight: 700;
+    &:hover {
+        background-color: $primaryColor;
+        border: 2px solid $primaryColor;
+        color: #fff;
+    }
+}
+
+.btn-save {
+    font-size: 20px;
+    padding: 0px 60px;
+    i {
+        padding-right: 5px;
+    }
+}
+
+.btn-full {
+    width: 100%;
+    font-weight: bold;
+    padding: 15px 10px;
+    margin-top: 15px;
+    font-size: 17px;
+}
+
+.btn-clean {
+    background-color: transparent;
+    border: 0px;
+}
+
+.bg-btn-primary {
+    border-radius: 50px;
+    background-color: $primaryColor;
+    border: 2px solid $primaryColor;
+    color: #fff;
+    &:hover {
+        background-color: #fff;
+        border: 2px solid $primaryColor;
+        color: $primaryColor;
+    }
+}
+
+.bg-btn-secondary {
+    font-weight: bold;
+    border-radius: 50px;
+    background-color: $primaryColor;
+    border: 2px solid $primaryColor;
+    color: #fff;
+    &:hover {
+        background-color: #fff;
+        border: 2px solid $primaryColor;
+        color: $primaryColor;
+    }
+}
+
+.btn-clear-list {
+    i {
+        transition: transform 200ms ease;
+        font-size: 22px;
+        margin: 0px 10px;
+        &:hover {
+            transition: transform 200ms ease;
+            transform: scale(1.2);
+        }
+    }
+    i.icon-success {
+        color: $success;
+    }
+    i.icon-danger {
+        color: $error;
+    }
+}
+
+.not-m-bt {
+    margin-bottom: 0px;
+}
+
+.m-t {
+    margin-top: 15px;
+}
+
+.small-p {
+    font-size: 14px;
+}
+
+.link {
+    cursor: pointer;
+    &:hover {
+        border-bottom: 1px solid $primaryColor;
+    }
+}
+
+.sa-input {
+    height: 44px;
+    padding: 0px 15px;
+    border: 2px solid $neutralColor;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-bottom: 25px;
+    &:focus {
+        border: 2px solid $primaryColor;
+    }
+}
+
+.sa-back-state {
+    display: flex;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            margin-left: 20px;
+            width: 24px;
+            margin-right: 5px;
+            fill: $neutralColor;
+        }
+        span {
+            font-size: 19px;
+            color: $neutralColor;
+            padding-right: 15px;
+        }
+        &:hover {
+            svg {
+                fill: $primaryColor;
+            }
+            span {
+                color: $primaryColor;
+            }
+        }
+    }
+}
+
+.input-group-flex {
+    display: flex;
+    input {
+        margin-right: 15px;
+    }
+}

@@ -1,0 +1,23 @@
+<div class="page-wrapper">
+    <div class="top-wrapper">
+        <div class="exit">
+            <i class="fas fa-sign-out-alt logout" (click)="logOut()"></i>
+        </div>
+    </div>
+    <div class="body-wrapper">
+        <nav class="side-nav-bar">
+            <ul>
+                <li *ngFor="let item of navbar">
+                    <a target="_self" (click)="goRoute(item.link)">
+                        <i class="{{item.icon}}"></i>
+                        <span>{{item.name}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>

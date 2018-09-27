@@ -1,0 +1,60 @@
+@import "src/app/variables";
+.bg-login {
+    background-image: url("../../assets/images/bg-login.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    .container-login {
+        position: relative;
+        z-index: 1001;
+        height: 100vh;
+        min-height: 100%;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        .box-login {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            .top-login {
+                h3 {
+                    margin: 5px 0px 24px 0px;
+                    font-size: 36px;
+                    color: #eece36;
+                    font-weight: 400;
+                    span {
+                        font-weight: 600;
+                    }
+                }
+            }
+            box-shadow: 0px 0px 10px 2px rgba(0,
+            0,
+            0,
+            0.5);
+            padding: 40px;
+            width: 500px;
+        }
+        .middle-login {
+            display: flex;
+            flex-direction: column;
+            input {
+                margin: 10px 0px;
+                height: 55px;
+                padding: 0px 25px;
+                border-radius: 50px;
+                border: 2px solid $whiteColor;
+                &:focus {
+                    border: 2px solid $primaryColor;
+                }
+            }
+        }
+        .bottom-login {
+            .btn-login {
+                padding: 6px 25px;
+                margin-top: 15px;
+            }
+        }
+    }
+}

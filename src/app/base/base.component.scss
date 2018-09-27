@@ -1,0 +1,69 @@
+@import "src/app/variables";
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    .top-wrapper {
+        height: 64px;
+        background-color: $blackColor;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .exit {
+            cursor: pointer;
+            color: #fff;
+            padding: 10px 20px;
+            transition: font-size 100ms ease;
+            &:hover {
+                transition: font-size 100ms ease;
+                font-size: 22px;
+                color: $primaryColor;
+            }
+        }
+    }
+    .body-wrapper {
+        display: flex;
+        nav {
+            width: 300px;
+            background-color: $blackColor;
+            height: calc(100vh - 69px);
+            border-top: 5px solid $primaryColor;
+            ul {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                list-style-type: none;
+                li {
+                    a {
+                        display: flex;
+                        align-items: center;
+                        padding: 10px 20px;
+                        font-size: 18px;
+                        color: #fff;
+                        i {
+                            text-align: center;
+                            padding-left: 0px;
+                            padding-right: 10px;
+                            width: 26px;
+                        }
+                        span {
+                            transition: padding 100ms ease;
+                        }
+                        &:hover {
+                            i {
+                                color: $primaryColor;
+                            }
+                            span {
+                                transition: padding 100ms ease;
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .content {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+}

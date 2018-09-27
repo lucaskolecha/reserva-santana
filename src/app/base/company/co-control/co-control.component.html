@@ -1,0 +1,34 @@
+<div class="ap-control-wrapper">
+    <div class="flex-row flex-between">
+        <h1>Cadastro de Empresas</h1>
+        <div class="sa-back-state">
+            <a target="_self" (click)="goBack()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" version="1.1" x="0px" y="0px">
+                    <g>
+                        <path d="M10.7071068,3.70710678 C11.0976311,3.31658249 11.0976311,2.68341751 10.7071068,2.29289322 C10.3165825,1.90236893 9.68341751,1.90236893 9.29289322,2.29289322 L4.29289322,7.29289322 C3.90236893,7.68341751 3.90236893,8.31658249 4.29289322,8.70710678 L9.29289322,13.7071068 C9.68341751,14.0976311 10.3165825,14.0976311 10.7071068,13.7071068 C11.0976311,13.3165825 11.0976311,12.6834175 10.7071068,12.2928932 L6.41421356,8 L10.7071068,3.70710678 Z"/>
+                    </g>
+                </svg>
+                <span>
+                    Voltar
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="flex-row">
+        <form autocomplete="off">
+            <cp-image-crop cp-model="image.foto"></cp-image-crop>
+            <input class="sa-input" placeholder="Nome da Empresa" name="name" [(ngModel)]="entity.name">
+            <input class="sa-input" placeholder="Telefone" name="phone" [(ngModel)]="entity.phone">
+            <div class="input-group-flex">
+                <input class="sa-input" placeholder="Abre as" name="open" [(ngModel)]="entity.open">
+                <input class="sa-input" placeholder="Fecha as" name="close" [(ngModel)]="entity.close">
+            </div>
+            <input class="sa-input" placeholder="E-mail" name="email" [(ngModel)]="entity.email">
+            <input class="sa-input" placeholder="Senha" name="password" [disabled]="uid" [(ngModel)]="entity.password">
+            <input class="sa-input" placeholder="Repetir Senha" name="repassword" [disabled]="uid" [(ngModel)]="repassword">
+            <button type="button" class="btn btn-sa btn-save" (click)="saveCompany()">
+            Salvar
+          </button>
+        </form>
+    </div>
+</div>

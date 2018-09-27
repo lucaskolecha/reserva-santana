@@ -1,0 +1,28 @@
+<div class="ap-control-wrapper">
+    <div class="flex-row flex-between">
+        <h1>Cadastro de Produtos</h1>
+        <div class="sa-back-state">
+            <a target="_self" (click)="goBack()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" version="1.1" x="0px" y="0px">
+                  <g>
+                      <path d="M10.7071068,3.70710678 C11.0976311,3.31658249 11.0976311,2.68341751 10.7071068,2.29289322 C10.3165825,1.90236893 9.68341751,1.90236893 9.29289322,2.29289322 L4.29289322,7.29289322 C3.90236893,7.68341751 3.90236893,8.31658249 4.29289322,8.70710678 L9.29289322,13.7071068 C9.68341751,14.0976311 10.3165825,14.0976311 10.7071068,13.7071068 C11.0976311,13.3165825 11.0976311,12.6834175 10.7071068,12.2928932 L6.41421356,8 L10.7071068,3.70710678 Z"/>
+                  </g>
+              </svg>
+                <span>
+                  Voltar
+              </span>
+            </a>
+        </div>
+    </div>
+    <div class="flex-row">
+        <form autocomplete="off">
+            <input class="sa-input" placeholder="Nome do Produto" name="name" [(ngModel)]="entity.name">
+            <input class="sa-input" placeholder="Categoria" name="category" [(ngModel)]="entity.category">
+            <input class="sa-input" placeholder="Preço" name="price" [(ngModel)]="entity.price">
+
+            <button type="button" class="btn btn-sa btn-save" (click)="saveProduct()">
+          Salvar
+        </button>
+        </form>
+    </div>
+</div>
