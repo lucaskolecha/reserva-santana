@@ -2,12 +2,15 @@
 .page-wrapper {
     display: flex;
     flex-direction: column;
+    transition: all 500ms ease;
     .top-wrapper {
         height: 64px;
         background-color: $blackColor;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        position: fixed;
+        width: 100%;
         .exit {
             cursor: pointer;
             color: #fff;
@@ -23,10 +26,12 @@
     .body-wrapper {
         display: flex;
         nav {
-            width: 300px;
+            width: 270px;
             background-color: $blackColor;
+            margin-top: 64px;
             height: calc(100vh - 69px);
             border-top: 5px solid $primaryColor;
+            position: fixed;
             ul {
                 display: flex;
                 flex-direction: column;
@@ -63,7 +68,37 @@
         }
         .content {
             width: 100%;
+            margin-top: 64px;
+            margin-left: 270px;
             padding: 15px;
         }
     }
+}
+
+.page-wrapper.loaderBody {
+    filter: blur(4px);
+}
+
+.loaderAll {
+    transition: all 500ms ease;
+    position: fixed;
+    z-index: 1001;
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    svg {
+        width: 84px;
+        height: 84px;
+    }
+    img {
+        max-width: 200px;
+    }
+}
+
+.loaderAll.active {
+    opacity: 1;
 }

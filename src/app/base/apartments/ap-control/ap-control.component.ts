@@ -11,22 +11,11 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class ApControlComponent implements OnInit {
 
-  private uid: any;
-  private rePassword: string;
-
-  private entity: any = {
-    number: null,
-    person: null,
-    email: null,
-    password: null
-  };
-
-  private oldEntity: any = {
-    number: null,
-    person: null,
-    email: null,
-    password: null
-  };
+  public uid: any;
+  public rePassword: string;
+  public loaderBtn = true;
+  public entity: any = {};
+  public oldEntity: any = {};
 
   constructor(private activatedRoute: ActivatedRoute, private apService: ApartmentsService, private router: Router, private as: AuthService, private notif: NotifierService) {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -86,10 +75,11 @@ export class ApControlComponent implements OnInit {
   }
 
   saveApartment() {
-    if (!this.validadePassword()) {
+    if (!this.uid && !this.validadePassword()) {
       this.notif.notify('error', 'Campo Senha e Repetir Senha estão diferentes.');
       return;
     }
+    this.loaderBtn = false;
     this.apService.saveApartments(this.uid, this.entity, this.oldEntity).then(() => {
       if (this.uid) {
         this.notif.notify('success', 'Uhull, apartamento alterado com sucesso!!!');
@@ -98,6 +88,7 @@ export class ApControlComponent implements OnInit {
       }
     }).catch((err) => {
       this.as.translateError(err);
+      this.loaderBtn = true;
     });
   }
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ApartmentsService } from './apartments.service';
 import swal from 'sweetalert2';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-apartments',
@@ -15,7 +16,7 @@ export class ApartmentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private router: Router, private ap: ApartmentsService) {
+  constructor(private router: Router, private ap: ApartmentsService, private ls: LoaderService) {
   }
 
   ngOnInit() {
@@ -23,9 +24,11 @@ export class ApartmentsComponent implements OnInit {
   }
 
   getAllRecords() {
+    this.ls.activeLoader();
     this.ap.getAll().then((resp: Array<ApartmentElement>) => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator;
+      this.ls.removeLoader();
     });
   }
 

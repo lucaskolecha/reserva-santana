@@ -41,13 +41,11 @@ export class AuthService {
     this.fire.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         this.fire.authState.subscribe(user => {
-          console.log(user);
           if (user) {
             localStorage.setItem('tokenUid', user.uid);
             this.router.navigate(['/app/home']);
           }
         });
-
       })
       .catch(err => {
         console.log('error', err);

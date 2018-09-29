@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { firestore } from 'firebase';
 import { storage } from 'firebase';
 
 @Injectable({

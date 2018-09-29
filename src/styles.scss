@@ -39,6 +39,12 @@ form {
     align-items: center;
 }
 
+.flex-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -90,6 +96,10 @@ button.btn[disabled] {
     cursor: not-allowed;
 }
 
+h1 {
+    color: $blackColor;
+}
+
 .btn {
     height: 54px;
     padding: 0px 20px;
@@ -113,10 +123,34 @@ button.btn[disabled] {
 
 .btn-save {
     font-size: 20px;
-    padding: 0px 60px;
+    padding: 0px 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 200ms ease;
+    span {
+        transition: transform 200ms ease;
+        transform: translateY(50%);
+    }
+    span.loader {
+        transform: translateY(-100%);
+    }
+    svg {
+        transition: transform 200ms ease;
+        fill: #fff;
+        transform: translateY(100%);
+    }
+    svg.loader {
+        transform: translateY(-50%);
+    }
     i {
         padding-right: 5px;
     }
+}
+
+.btn-save.loader {
+    opacity: 0.5;
 }
 
 .btn-full {
