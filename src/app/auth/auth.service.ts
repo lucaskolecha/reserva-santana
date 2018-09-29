@@ -65,6 +65,10 @@ export class AuthService {
       })
   }
 
+  verifyPassword(pass, rePass) {
+    return pass === rePass;
+  }
+
   translateError(err) {
     if (err.message == 'EMAIL_EXISTS') {
       this.notif.notify('error', 'E-mail ja está em uso.');

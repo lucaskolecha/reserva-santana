@@ -14,6 +14,7 @@ export class PrControlComponent implements OnInit {
     name: null,
     category: null,
     price: null,
+    image: 'assets/images/logo.jpeg'
   };
 
   constructor(private activatedRoute: ActivatedRoute, private prService: ProductsService, private router: Router) {

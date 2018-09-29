@@ -16,6 +16,9 @@
     </div>
     <div class="flex-row">
         <form autocomplete="off">
+            <div class="image">
+                <cp-image-crop cp-model="entity.image" crop="cropConfig"></cp-image-crop>
+            </div>
             <input class="sa-input" placeholder="Nome do Produto" name="name" [(ngModel)]="entity.name">
             <input class="sa-input" placeholder="Categoria" name="category" [(ngModel)]="entity.category">
             <input class="sa-input" placeholder="Preço" name="price" [(ngModel)]="entity.price">
