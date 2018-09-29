@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+import { Constants } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private fire: AngularFireAuth, private router: Router, private notif: NotifierService) {
+  private typeUser: string;
+  private db;
 
+  constructor(private fire: AngularFireAuth, private router: Router, private notif: NotifierService) {
+    this.db = firestore();
+    this.db.settings({ timestampsInSnapshots: true });
   }
 
   sendToken() {
@@ -29,11 +35,64 @@ export class AuthService {
   }
 
   isLoggedIn(): Promise<boolean> {
+    const typeU = sessionStorage.getItem('typeUser');
+    console.log(typeU);
     return this.getUserLogged().then(resp => {
-      if (resp != null) {
+      if (resp != null && typeU === this.typeUser) {
         return true;
       }
+      sessionStorage.clear();
       return false;
+    });
+  }
+
+  searchSyndicateByUid(user) {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_SYNDICATES).where('uid', '==', user.uid).get().then((documents) => {
+        if (documents.docs.length > 0) {
+          if (documents.docs && documents.docs[0].exists) {
+            this.typeUser = 'SYNDICATE';
+            response(documents.docs[0].data());
+          }
+        } else {
+          response(null);
+        }
+      });
+    });
+  }
+
+  searchCompaniesByEmail(user) {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_COMPANIES).where('email', '==', user.email).get().then((documents) => {
+        if (documents.docs.length > 0) {
+          response(documents);
+        } else {
+          response(null);
+        }
+      });
+    });
+  }
+
+  identidyUser(user: Object) {
+    console.log(user);
+    return new Promise((response) => {
+      this.searchSyndicateByUid(user).then((syndicate) => {
+        if (syndicate) {
+          this.typeUser = 'SYNDICATE';
+          sessionStorage.setItem('typeUser', this.typeUser);
+          response(syndicate);
+        } else {
+          this.searchCompaniesByEmail(user).then((company) => {
+            if (company) {
+              this.typeUser = 'COMPANY';
+              sessionStorage.setItem('typeUser', this.typeUser);
+              response(company);
+            } else {
+              response(null);
+            }
+          });
+        }
+      });
     });
   }
 
@@ -42,8 +101,10 @@ export class AuthService {
       .then(() => {
         this.fire.authState.subscribe(user => {
           if (user) {
-            localStorage.setItem('tokenUid', user.uid);
-            this.router.navigate(['/app/home']);
+            this.identidyUser(user).then(() => {
+              sessionStorage.setItem('tokenUid', user.uid);
+              this.router.navigate(['/app/home']);
+            });
           }
         });
       })
@@ -55,7 +116,7 @@ export class AuthService {
   logOut() {
     this.fire.auth.signOut()
       .then(() => {
-        localStorage.clear();
+        sessionStorage.clear();
         this.router.navigate(['']);
       })
       .catch(err => {

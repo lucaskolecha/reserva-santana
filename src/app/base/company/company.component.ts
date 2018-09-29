@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { CompanyService } from './company.service';
 import swal from 'sweetalert2';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-company',
@@ -15,7 +16,7 @@ export class CompanyComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private router: Router, private cs: CompanyService) { }
+  constructor(private router: Router, private cs: CompanyService, private ls: LoaderService) { }
 
   ngOnInit() {
     this.getAllRecords();
@@ -30,9 +31,11 @@ export class CompanyComponent implements OnInit {
   }
 
   getAllRecords() {
+    this.ls.activeLoader();
     this.cs.getAll().then((resp: Array<CompanyElement>) => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator;
+      this.ls.removeLoader();
     });
   }
 

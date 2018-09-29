@@ -48,7 +48,7 @@
     <div class="body-wrapper">
         <nav class="side-nav-bar">
             <ul>
-                <li *ngFor="let item of navbar">
+                <li *ngFor="let item of navbar" [hidden]="typeUser != item.user">
                     <a target="_self" (click)="goRoute(item.link)">
                         <i class="{{item.icon}}"></i>
                         <span>{{item.name}}</span>

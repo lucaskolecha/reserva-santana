@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 import { Constants } from '../../constants';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -101,7 +100,7 @@ export class CompanyService {
             response(entity);
           });
         }).catch((err) => {
-          console.log(err);
+          console.error(err);
           reject(err.error.error);
         });
       }

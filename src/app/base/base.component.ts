@@ -10,19 +10,21 @@ import { LoaderService } from './loader.service';
 })
 export class BaseComponent implements OnInit {
 
-  private navbar;
+  public navbar;
+  public typeUser;
 
   constructor(private authService: AuthService, private router: Router, private ls: LoaderService) {
+    this.typeUser = sessionStorage.getItem('typeUser');
     this.navbar = [
-      { name: 'Início', icon: 'fas fa-home', link: '/app/home' },
-      { name: 'Apartamentos', icon: 'fas fa-building', link: '/app/apartments' },
-      { name: 'Empresas', icon: 'fas fa-industry', link: '/app/company' },
-      { name: 'Pedidos', icon: 'fas fa-paperclip', link: '/app/orders' },
-      { name: 'Produtos', icon: 'fas fa-box-open', link: '/app/products' }
+      { name: 'Início', icon: 'fas fa-home', link: '/app/home', user: 'SYNDICATE' },
+      { name: 'Apartamentos', icon: 'fas fa-building', link: '/app/apartments', user: 'SYNDICATE' },
+      { name: 'Empresas', icon: 'fas fa-industry', link: '/app/company', user: 'SYNDICATE' },
+      { name: 'Pedidos', icon: 'fas fa-paperclip', link: '/app/orders', user: 'COMPANY' },
+      { name: 'Produtos', icon: 'fas fa-box-open', link: '/app/products', user: 'COMPANY' }
     ];
   }
   ngOnInit() {
-    // this.ls.activeLoader();
+
   }
 
   goRoute(link) {

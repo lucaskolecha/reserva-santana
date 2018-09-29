@@ -11,27 +11,17 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./co-control.component.scss']
 })
 export class CoControlComponent implements OnInit {
-  private uid: any;
-  private cropConfig: any;
+  public uid: any;
+  public rePassword: string;
+  public cropConfig: any;
+  public loaderBtn = true;
 
-  private entity: any = {
-    name: null,
-    phone: null,
-    open: null,
-    close: null,
-    email: null,
-    password: null,
-    image: 'assets/images/logo.jpeg'
+  public entity: any = {
+    image: 'assets/images/logo.png'
   };
 
-  private oldEntity: any = {
-    name: null,
-    phone: null,
-    open: null,
-    close: null,
-    email: null,
-    password: null,
-    image: 'assets/images/logo.jpeg'
+  public oldEntity: any = {
+    image: 'assets/images/logo.png'
   };
 
   constructor(private storageService: StorageService, private activatedRoute: ActivatedRoute, private coService: CompanyService, private router: Router, private as: AuthService, private notif: NotifierService) {
@@ -71,8 +61,44 @@ export class CoControlComponent implements OnInit {
     this.router.navigate(['/app/company']);
   }
 
+  validadePassword() {
+    let resp: boolean;
+    if (!this.uid) {
+      resp = this.as.verifyPassword(this.entity.password, this.rePassword);
+      if (!resp) {
+        this.entity.password = '';
+        this.rePassword = '';
+        document.getElementById('password').focus();
+      }
+      return resp;
+    }
+  }
+
+  disableButton() {
+    if (this.uid) {
+      if (!this.entity.name ||
+        !this.entity.email) {
+        return true;
+      }
+    } else {
+      if (!this.entity.name ||
+        !this.entity.email ||
+        !this.entity.password ||
+        !this.rePassword ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   saveCompany() {
-    if (this.entity.image != 'assets/images/logo.jpeg') {
+    if (!this.uid && !this.validadePassword()) {
+      this.notif.notify('error', 'Campo Senha e Repetir Senha estão diferentes.');
+      return;
+    }
+    this.loaderBtn = false;
+    this.loaderBtn = false;
+    if (this.entity.image != 'assets/images/logo.png') {
       this.storageService.upload(this.entity.image).then((urlImage) => {
         this.entity.image = urlImage;
       });
@@ -85,6 +111,7 @@ export class CoControlComponent implements OnInit {
       }
     }).catch((err) => {
       this.as.translateError(err);
+      this.loaderBtn = true;
     });
   }
 

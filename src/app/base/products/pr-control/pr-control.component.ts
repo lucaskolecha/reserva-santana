@@ -30,7 +30,7 @@ export class PrControlComponent implements OnInit {
             this.router.navigate(['/app/products']);
           }
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
         });
       }
     });
