@@ -4,26 +4,19 @@ import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Constants } from '../constants';
+import { reject } from 'q';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private typeUser: string;
+  public typeUser;
   private db;
 
   constructor(private fire: AngularFireAuth, private router: Router, private notif: NotifierService) {
     this.db = firestore();
     this.db.settings({ timestampsInSnapshots: true });
-  }
-
-  sendToken() {
-
-  }
-
-  getToken() {
-
   }
 
   getUserLogged() {
@@ -36,9 +29,8 @@ export class AuthService {
 
   isLoggedIn(): Promise<boolean> {
     const typeU = sessionStorage.getItem('typeUser');
-    console.log(typeU);
     return this.getUserLogged().then(resp => {
-      if (resp != null && typeU === this.typeUser) {
+      if (resp != null) {
         return true;
       }
       sessionStorage.clear();
@@ -73,9 +65,8 @@ export class AuthService {
     });
   }
 
-  identidyUser(user: Object) {
-    console.log(user);
-    return new Promise((response) => {
+  identifyUser(user: Object) {
+    return new Promise((response, reject) => {
       this.searchSyndicateByUid(user).then((syndicate) => {
         if (syndicate) {
           this.typeUser = 'SYNDICATE';
@@ -88,7 +79,7 @@ export class AuthService {
               sessionStorage.setItem('typeUser', this.typeUser);
               response(company);
             } else {
-              response(null);
+              reject(true);
             }
           });
         }
@@ -96,31 +87,35 @@ export class AuthService {
     });
   }
 
-  signIn(email: string, password: any) {
-    this.fire.auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
+  signIn(email: string, password: string) {
+    return new Promise((response, reject) => {
+      this.fire.auth.signInWithEmailAndPassword(email, password).then(() => {
         this.fire.authState.subscribe(user => {
           if (user) {
-            this.identidyUser(user).then(() => {
+            this.identifyUser(user).then((resp) => {
               sessionStorage.setItem('tokenUid', user.uid);
               this.router.navigate(['/app/home']);
+              response(resp);
+            }).catch(() => {
+              const err = { code: 'PERMISSION_DENIED' };
+              reject(err);
             });
           }
         });
+      }).catch(err => {
+        reject(err);
       })
-      .catch(err => {
-        console.log('error', err);
-      })
+    });
   }
 
   logOut() {
     this.fire.auth.signOut()
       .then(() => {
         sessionStorage.clear();
-        this.router.navigate(['']);
+        this.router.navigate(['login']);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -142,4 +137,17 @@ export class AuthService {
     }
   }
 
+  translateLoginError(err) {
+    if (err.code == 'auth/invalid-email') {
+      return 'E-mail não é valido';
+    } else if (err.code == 'auth/argument-error') {
+      return 'E-mail ou senha inválidos';
+    } else if (err.code == 'auth/user-not-found') {
+      return 'Não foi encontrado nenhum usuário com essas credenciais';
+    } else if (err.code == 'auth/wrong-password') {
+      return 'Senha inválida';
+    } else if (err.code == 'PERMISSION_DENIED') {
+      return 'Usuário sem permissão';
+    }
+  }
 }

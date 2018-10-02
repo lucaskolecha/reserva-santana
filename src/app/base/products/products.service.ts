@@ -9,7 +9,7 @@ import { Constants } from '../../constants';
 export class ProductsService {
 
   private db;
-  private uidLogged = 'YhqGKDVf1c65GJHIFlYn';
+  private uidLogged = sessionStorage.getItem('tokenUid');
 
   constructor(private router: Router) {
     this.db = firestore();

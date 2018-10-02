@@ -101,7 +101,7 @@ export class ApartmentsService {
             response(entity);
           });
         }).catch((err) => {
-          console.log(err);
+          console.error(err);
           reject(err.error.error);
         });
       }

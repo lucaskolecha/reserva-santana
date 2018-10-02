@@ -29,7 +29,7 @@ export class ApControlComponent implements OnInit {
             this.router.navigate(['/app/company']);
           }
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
         });
       }
     });

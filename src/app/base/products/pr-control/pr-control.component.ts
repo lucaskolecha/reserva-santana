@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductsService } from '../products.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-pr-control',
@@ -9,15 +10,13 @@ import { ProductsService } from '../products.service';
 })
 export class PrControlComponent implements OnInit {
   private uid: any;
+  public loaderBtn = true;
 
-  private entity = {
-    name: null,
-    category: null,
-    price: null,
-    image: 'assets/images/logo.jpeg'
+  private entity: any = {
+    image: 'assets/images/logo.png'
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private prService: ProductsService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private prService: ProductsService, private router: Router, private storageService: StorageService) {
     let array = <any>[];
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params.uid) {
@@ -43,7 +42,22 @@ export class PrControlComponent implements OnInit {
     this.router.navigate(['/app/products']);
   }
 
+  disableButton() {
+    if (!this.entity.name ||
+      !this.entity.category ||
+      !this.entity.price) {
+      return true;
+    }
+    return false;
+  }
+
   saveProduct() {
+    this.loaderBtn = false;
+    if (this.entity.image != 'assets/images/logo.png') {
+      this.storageService.upload(this.entity.image, 'product').then((urlImage) => {
+        this.entity.image = urlImage;
+      });
+    }
     this.prService.saveProducts(this.uid, this.entity).then(() => {
     });
   }

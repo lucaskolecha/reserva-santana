@@ -42,7 +42,7 @@ export class CoControlComponent implements OnInit {
             this.router.navigate(['/app/company']);
           }
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
         });
       }
     });
@@ -97,9 +97,8 @@ export class CoControlComponent implements OnInit {
       return;
     }
     this.loaderBtn = false;
-    this.loaderBtn = false;
     if (this.entity.image != 'assets/images/logo.png') {
-      this.storageService.upload(this.entity.image).then((urlImage) => {
+      this.storageService.upload(this.entity.image, 'company').then((urlImage) => {
         this.entity.image = urlImage;
       });
     }
