@@ -137,17 +137,7 @@ export class AuthService {
     }
   }
 
-  translateLoginError(err) {
-    if (err.code == 'auth/invalid-email') {
-      return 'E-mail não é valido';
-    } else if (err.code == 'auth/argument-error') {
-      return 'E-mail ou senha inválidos';
-    } else if (err.code == 'auth/user-not-found') {
-      return 'Não foi encontrado nenhum usuário com essas credenciais';
-    } else if (err.code == 'auth/wrong-password') {
-      return 'Senha inválida';
-    } else if (err.code == 'PERMISSION_DENIED') {
-      return 'Usuário sem permissão';
-    }
+  translateLoginError() {
+    return 'Credenciais inválidas';
   }
 }

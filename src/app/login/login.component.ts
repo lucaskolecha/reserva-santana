@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       document.getElementById('error').classList.add('active');
       document.getElementById('pass').classList.add('op0');
       document.getElementById('pass').classList.remove('op1');
-      this.errorText = this.authService.translateLoginError(err);
+      this.errorText = this.authService.translateLoginError();
       this.loaderBtn = true;
     });
   }

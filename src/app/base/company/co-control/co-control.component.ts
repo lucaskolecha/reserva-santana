@@ -101,6 +101,8 @@ export class CoControlComponent implements OnInit {
       this.storageService.upload(this.entity.image, 'company').then((urlImage) => {
         this.entity.image = urlImage;
       });
+    } else {
+      this.entity.image = null;
     }
     this.coService.saveCompany(this.uid, this.entity, this.oldEntity).then(() => {
       if (this.uid) {
