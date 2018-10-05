@@ -50,6 +50,22 @@ export class ProductsService {
     });
   }
 
+  getCategories():Promise<Array<Object>> {
+    let all = [];
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_COMPANIES).doc(this.uidLogged)
+        .collection(Constants.COLLECTION_PRODUCTS).get().then((documents) => {
+          documents.forEach(function (doc) {
+            let item = {
+              category: doc.data().category
+            }
+            all.push(item);
+          });
+          response(all);
+        });
+    });
+  }
+
   saveProducts(uid, entity) {
     return new Promise((response, rej) => {
       if (uid) {

@@ -1,4 +1,4 @@
-<div class="ap-control-wrapper">
+<div class="pr-control-wrapper">
     <div class="flex-row flex-between">
         <h1>Cadastro de Produtos</h1>
         <div class="sa-back-state">
@@ -20,9 +20,15 @@
                 <cp-image-crop cp-model="entity.image" crop="cropConfig"></cp-image-crop>
             </div>
             <input class="sa-input" placeholder="Nome do Produto" name="name" [(ngModel)]="entity.name">
-            <input class="sa-input" placeholder="Categoria" name="category" [(ngModel)]="entity.category">
-            <input class="sa-input" placeholder="Preço" name="price" [(ngModel)]="entity.price">
-
+            <div class="group-select">
+                <input class="sa-input w100" (keyup)="keyPressOptions(entity.category)" (blur)="toggleOtions()" (focus)="toggleOtions()" placeholder="Categoria" name="category" [(ngModel)]="entity.category">
+                <ul class="options" *ngIf="opts && entity.category">
+                    <li class="item" (click)="setCategory(item.category)" *ngFor="let item of options">{{item.category}}</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <input currencyMask class="sa-input" placeholder="Preço" name="price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [(ngModel)]="entity.price">
+            </div>
             <div class="flex-right">
                 <button type="button" [ngClass]="!loaderBtn ? 'loader' : ''" class="btn btn-sa btn-save" [disabled]="disableButton()" (click)="saveProduct()"><span [ngClass]="!loaderBtn ? 'loader' : ''">Salvar</span>
                         <svg version="1.1" [ngClass]="!loaderBtn ? 'loader' : ''" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">

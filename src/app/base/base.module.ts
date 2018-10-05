@@ -5,6 +5,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
+import {NgxMaskModule} from 'ngx-mask';
+import { NgxCurrencyModule } from "ngx-currency";
 
 /* Components */
 import { BaseComponent } from './base.component';
@@ -24,6 +26,8 @@ import { PrControlComponent } from './products/pr-control/pr-control.component';
     MatTableModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
+    NgxCurrencyModule,
+    NgxMaskModule.forRoot(),
     RouterModule.forChild([
       {
         path: 'app',

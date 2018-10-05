@@ -9,8 +9,11 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./pr-control.component.scss']
 })
 export class PrControlComponent implements OnInit {
-  private uid: any;
-  public loaderBtn = true;
+  private uid: any
+  public loaderBtn = true
+  public categories: Array<Object>
+  public opts: boolean = false
+  public options: Array<Object>
 
   private entity: any = {
     image: 'assets/images/logo.png'
@@ -36,6 +39,9 @@ export class PrControlComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCategories().then((resp: Array<Object>) => {
+      this.categories = resp;
+    });
   }
 
   goBack() {
@@ -49,6 +55,47 @@ export class PrControlComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getCategories(): Promise<Array<Object>> {
+    return new Promise((response) => {
+      return this.prService.getCategories().then((categories: Array<Object>) => {
+        response(categories);
+      });
+    });
+  }
+
+  setCategory(category) {
+    this.entity.category = category;
+  }
+
+  toggleOtions() {
+    setTimeout(function () {
+      this.opts = !this.opts;
+    }.bind(this), 100);
+  }
+
+  keyPressOptions(param) {
+    if (param) {
+      this.getSearch(param).then((arr: Array<Object>) => {
+        this.options = this.removeEquals(arr, 'category');
+      });
+    }
+  }
+
+  getSearch(param) {
+    return new Promise((resolve) => {
+      var arr = this.categories.filter(function (item: any) {
+        return item.category.toLowerCase().indexOf(param.toLowerCase()) != -1;
+      })
+      resolve(arr);
+    })
+  };
+
+  removeEquals(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
   }
 
   saveProduct() {

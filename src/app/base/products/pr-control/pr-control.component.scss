@@ -1,0 +1,28 @@
+.pr-control-wrapper {
+    .group-select {
+        position: relative;
+        .options {
+            position: absolute;
+            margin: 0px;
+            list-style-type: none;
+            padding: 0;
+            top: 52px;
+            left: 17px;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            .item {
+                transition: background-color 300ms ease;
+                min-width: 100px;
+                padding: 10px 15px;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #ddd;
+                }
+            }
+        }
+        .w100 {
+            width: 100%;
+        }
+    }
+}

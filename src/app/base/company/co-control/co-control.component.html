@@ -20,10 +20,10 @@
                 <cp-image-crop cp-model="entity.image" crop="cropConfig"></cp-image-crop>
             </div>
             <input class="sa-input" placeholder="Nome da Empresa" name="name" [(ngModel)]="entity.name">
-            <input class="sa-input" placeholder="Telefone" name="phone" [(ngModel)]="entity.phone">
+            <input class="sa-input" placeholder="Telefone" name="phone" mask="(00) 0 0000-0000" [(ngModel)]="entity.phone">
             <div class="input-group-flex">
-                <input class="sa-input" placeholder="Abre as" name="open" [(ngModel)]="entity.open">
-                <input class="sa-input" placeholder="Fecha as" name="close" [(ngModel)]="entity.close">
+                <input class="sa-input" placeholder="Abre as" name="open" mask="00:00" [(ngModel)]="entity.open">
+                <input class="sa-input" placeholder="Fecha as" name="close" mask="00:00" [(ngModel)]="entity.close">
             </div>
             <input class="sa-input" placeholder="E-mail" name="email" [(ngModel)]="entity.email">
             <input type="password" class="sa-input" placeholder="Senha" name="password" id="password" [disabled]="uid" [(ngModel)]="entity.password">
