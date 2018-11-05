@@ -3,4 +3,5 @@ export const Constants = {
   COLLECTION_SYNDICATES: 'syndicates',
   COLLECTION_COMPANIES: 'companies',
   COLLECTION_PRODUCTS: 'products',
+  COLLECTION_ORDERS: 'orders',
 }

@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  displayedColumns: any[] = ['name', 'category', 'price', 'action'];
+  displayedColumns: any[] = ['name', 'category', 'unit', 'price', 'action'];
   private dataSource: MatTableDataSource<ProductsElement>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

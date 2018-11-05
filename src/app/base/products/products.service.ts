@@ -40,6 +40,7 @@ export class ProductsService {
             let item = {
               name: doc.data().name,
               category: doc.data().category,
+              kilogram: doc.data().kilogram,
               price: doc.data().price,
               uid: doc.id
             }

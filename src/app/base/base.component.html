@@ -41,8 +41,11 @@
 </div>
 <div class="page-wrapper" id="bodyLoader">
     <div class="top-wrapper">
-        <div class="exit">
-            <i class="fas fa-sign-out-alt logout" (click)="logOut()"></i>
+        <div class="avatar">
+            <img class="image" src="{{userInfo.image}}"> <span>{{userInfo.name}}</span>
+        </div>
+        <div class="exit" (click)="logOut()">
+            <i class="fas fa-sign-out-alt logout"></i> Sair
         </div>
     </div>
     <div class="body-wrapper">

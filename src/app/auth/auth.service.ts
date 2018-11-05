@@ -57,7 +57,9 @@ export class AuthService {
     return new Promise((response) => {
       this.db.collection(Constants.COLLECTION_COMPANIES).where('email', '==', user.email).get().then((documents) => {
         if (documents.docs.length > 0) {
-          response(documents);
+          let company = documents.docs[0].data()
+          company['uid'] = documents.docs[0].id;
+          response(company);
         } else {
           response(null);
         }
@@ -92,8 +94,17 @@ export class AuthService {
       this.fire.auth.signInWithEmailAndPassword(email, password).then(() => {
         this.fire.authState.subscribe(user => {
           if (user) {
-            this.identifyUser(user).then((resp) => {
-              sessionStorage.setItem('tokenUid', user.uid);
+            this.identifyUser(user).then((resp:any) => {
+              const info = {
+                name: resp.name,
+                image: resp.image,
+                open:  resp.open,
+                close: resp.close,
+                email: resp.email,
+                phone: resp.phone
+              }
+              sessionStorage.setItem('tokenUid', resp.uid);
+              sessionStorage.setItem('userInfo', JSON.stringify(info));
               this.router.navigate(['/app/home']);
               response(resp);
             }).catch(() => {

@@ -5,8 +5,9 @@ import { AuthGuard } from '../auth/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { NgxCurrencyModule } from "ngx-currency";
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 /* Components */
 import { BaseComponent } from './base.component';
@@ -17,6 +18,7 @@ import { CompanyComponent } from './company/company.component';
 import { CoControlComponent } from './company/co-control/co-control.component';
 import { ProductsComponent } from './products/products.component';
 import { PrControlComponent } from './products/pr-control/pr-control.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ] ,
@@ -27,6 +29,7 @@ import { PrControlComponent } from './products/pr-control/pr-control.component';
     BrowserAnimationsModule,
     MatPaginatorModule,
     NgxCurrencyModule,
+    UiSwitchModule,
     NgxMaskModule.forRoot(),
     RouterModule.forChild([
       {
@@ -68,11 +71,11 @@ import { PrControlComponent } from './products/pr-control/pr-control.component';
             component: CoControlComponent,
             canActivate: [AuthGuard]
           },
-          // {
-          //   path: 'orders',
-          //   component: OrdersComponent,
-          //   canActivate: [AuthGuard]
-          // },
+           {
+             path: 'orders',
+             component: OrdersComponent,
+             canActivate: [AuthGuard]
+           },
           {
             path: 'products',
             component: ProductsComponent,
@@ -92,6 +95,6 @@ import { PrControlComponent } from './products/pr-control/pr-control.component';
       }
     ])
   ],
-  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent]
+  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent, OrdersComponent]
 })
 export class BaseModule { }

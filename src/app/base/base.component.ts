@@ -10,11 +10,18 @@ import { LoaderService } from './loader.service';
 })
 export class BaseComponent implements OnInit {
 
-  public navbar;
-  public typeUser;
+  public navbar:any
+  public typeUser:any
+  public userInfo:any
 
   constructor(private authService: AuthService, private router: Router, private ls: LoaderService) {
-    this.typeUser = sessionStorage.getItem('typeUser');
+    this.typeUser = sessionStorage.getItem('typeUser')
+    if (this.typeUser === 'COMPANY') {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    } else {
+      this.userInfo = {image: '../../assets/images/logo.png', name: 'Administrador'}
+    }
+    
     this.navbar = [
       { name: 'Início', icon: 'fas fa-home', link: '/app/home', user: 'SYNDICATE' },
       { name: 'Apartamentos', icon: 'fas fa-building', link: '/app/apartments', user: 'SYNDICATE' },
@@ -28,11 +35,11 @@ export class BaseComponent implements OnInit {
   }
 
   goRoute(link) {
-    this.router.navigate([link]);
+    this.router.navigate([link])
   }
 
   logOut() {
-    this.authService.logOut();
+    this.authService.logOut()
   }
 
 }

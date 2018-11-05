@@ -16,6 +16,8 @@ export class PrControlComponent implements OnInit {
   public options: Array<Object>
 
   private entity: any = {
+    kilogram: false,
+    date: new Date().getTime(),
     image: 'assets/images/logo.png'
   };
 
@@ -72,7 +74,7 @@ export class PrControlComponent implements OnInit {
   toggleOtions() {
     setTimeout(function () {
       this.opts = !this.opts;
-    }.bind(this), 100);
+    }.bind(this), 300);
   }
 
   keyPressOptions(param) {

@@ -59,12 +59,14 @@ export class ApControlComponent implements OnInit {
     if (this.uid) {
       if (!this.entity.number ||
         !this.entity.email ||
+        !this.entity.phone ||
         !this.entity.person) {
         return true;
       }
     } else {
       if (!this.entity.number ||
         !this.entity.email ||
+        !this.entity.phone ||
         !this.entity.password ||
         !this.rePassword ||
         !this.entity.person) {

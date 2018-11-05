@@ -20,11 +20,17 @@
                 <cp-image-crop cp-model="entity.image" crop="cropConfig"></cp-image-crop>
             </div>
             <input class="sa-input" placeholder="Nome do Produto" name="name" [(ngModel)]="entity.name">
-            <div class="group-select">
+            <div class="group-select flex-row">
                 <input class="sa-input w100" (keyup)="keyPressOptions(entity.category)" (blur)="toggleOtions()" (focus)="toggleOtions()" placeholder="Categoria" name="category" [(ngModel)]="entity.category">
                 <ul class="options" *ngIf="opts && entity.category">
                     <li class="item" (click)="setCategory(item.category)" *ngFor="let item of options">{{item.category}}</li>
                 </ul>
+            </div>
+            <div class="col-md-12 margin-input">
+                <div class="group-switch">
+                    <label class="label-rs">Por Kg</label>
+                    <ui-switch name="kilogram" [(ngModel)]="entity.kilogram"></ui-switch>
+                </div>
             </div>
             <div class="col-md-4">
                 <input currencyMask class="sa-input" placeholder="Preço" name="price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [(ngModel)]="entity.price">

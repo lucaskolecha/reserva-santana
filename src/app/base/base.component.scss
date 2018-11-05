@@ -4,13 +4,29 @@
     flex-direction: column;
     transition: all 500ms ease;
     .top-wrapper {
-        height: 64px;
+        height: 84px;
         background-color: $blackColor;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         position: fixed;
         width: 100%;
+        .avatar {
+            color: #fff;
+            display: flex;
+            flex-direction: row;
+            max-height: 64px;
+            align-items: center;
+            justify-content: center;
+            .image {
+                border: 2px solid $primaryColor;
+                background-color: #fff;
+                width: 54px;
+                height: 54px;
+                border-radius: 50%;
+                margin: 0px 15px;
+            }
+        }
         .exit {
             cursor: pointer;
             color: #fff;
@@ -28,8 +44,8 @@
         nav {
             width: 270px;
             background-color: $blackColor;
-            margin-top: 64px;
-            height: calc(100vh - 69px);
+            margin-top: 84px;
+            height: calc(100vh - 89px);
             border-top: 5px solid $primaryColor;
             position: fixed;
             ul {
@@ -68,7 +84,7 @@
         }
         .content {
             width: 100%;
-            margin-top: 64px;
+            margin-top: 84px;
             margin-left: 270px;
             padding: 15px;
         }
