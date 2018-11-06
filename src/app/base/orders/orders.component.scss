@@ -1,0 +1,47 @@
+@import "src/app/variables";
+.orders-wrapper {
+    .select {
+        height: 34px;
+        padding: 0 9px;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .bt-confirm {
+        width: 100px;
+        transition: all 200ms ease;
+        &:hover {
+            transform: scale(1.1);
+        }
+        span {
+            border-bottom: 1px solid #ccc;
+            margin-left: 16px;
+        }
+    }
+    .link-f {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        transition: all 200ms ease;
+        margin-right: 20px;
+        font-weight: bold;
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $warn;
+        }
+        svg {
+            margin-right: 10px;
+            fill: $warn;
+            width: 34px;
+            &.back {
+                margin-right: 0px;
+                width: 48px;
+            }
+        }
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

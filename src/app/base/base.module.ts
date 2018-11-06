@@ -1,24 +1,32 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule, MatPaginatorModule } from '@angular/material';
-import { NgxMaskModule } from 'ngx-mask';
-import { NgxCurrencyModule } from "ngx-currency";
-import { UiSwitchModule } from 'ngx-toggle-switch';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
+import { AuthGuard } from '../auth/auth.guard'
+import { FormsModule } from '@angular/forms'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatTableModule, MatPaginatorModule } from '@angular/material'
+import { NgxMaskModule } from 'ngx-mask'
+import { NgxCurrencyModule } from "ngx-currency"
+import { UiSwitchModule } from 'ngx-toggle-switch'
 
 /* Components */
-import { BaseComponent } from './base.component';
-import { HomeComponent } from './home/home.component';
-import { ApartmentsComponent } from './apartments/apartments.component';
-import { ApControlComponent } from './apartments/ap-control/ap-control.component';
-import { CompanyComponent } from './company/company.component';
-import { CoControlComponent } from './company/co-control/co-control.component';
-import { ProductsComponent } from './products/products.component';
-import { PrControlComponent } from './products/pr-control/pr-control.component';
-import { OrdersComponent } from './orders/orders.component';
+import { BaseComponent } from './base.component'
+import { HomeComponent } from './home/home.component'
+import { ApartmentsComponent } from './apartments/apartments.component'
+import { ApControlComponent } from './apartments/ap-control/ap-control.component'
+import { CompanyComponent } from './company/company.component'
+import { CoControlComponent } from './company/co-control/co-control.component'
+import { ProductsComponent } from './products/products.component'
+import { PrControlComponent } from './products/pr-control/pr-control.component'
+import { OrdersComponent } from './orders/orders.component'
+
+/* Services */
+import { NotificationService } from './services/notification.service'
+import { StorageService } from './services/storage.service'
+import { OrdersService } from './orders/orders.service'
+import { CompanyService } from './company/company.service'
+import { ApartmentsService } from './apartments/apartments.service'
+import { ProductsService } from './products/products.service'
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ] ,
@@ -95,6 +103,7 @@ import { OrdersComponent } from './orders/orders.component';
       }
     ])
   ],
-  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent, OrdersComponent]
+  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent, OrdersComponent],
+  providers: [NotificationService, StorageService, OrdersService, CompanyService, ApartmentsService, ProductsService]
 })
 export class BaseModule { }

@@ -1,0 +1,95 @@
+<div class="orders-wrapper">
+    <div class="flex-row flex-center flex-between">
+        <h1>Pedidos {{labelTitle}}</h1>
+        <a class="link-f" target="_self" (click)="toggleList()">
+            <svg *ngIf="finishB" class="back" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" version="1.1" x="0px" y="0px"><title>Download s7.1</title><desc>Created with Sketch.</desc><path d="M 50.558 35.359 C 50.361 35.161 50.042 35.16 49.844 35.359 L 36.866 48.39 C 36.394 48.861 37.101 49.568 37.572 49.097 L 49.36 37.302 C 49.553 37.108 49.71 37.176 49.71 37.458 L 49.71 64.283 C 49.71 64.563 49.942 64.79 50.21 64.79 L 50.21 64.79 C 50.486 64.79 50.709 64.566 50.709 64.283 L 50.709 37.458 C 50.709 37.178 50.863 37.105 51.06 37.302 L 62.848 49.097 C 63.319 49.568 64.026 48.861 63.555 48.39 L 50.558 35.359 Z" fill-opacity="1.0" transform="matrix(0, -1, 1, 0, 0.210167, 100.210293)" stroke="none" stroke-width="1" fill-rule="evenodd"/><path d="M 80 50 C 80 66.5685424949238 66.5685424949238 80 50 80 C 33.431457505076196 80 20.000000000000004 66.5685424949238 20 50 C 19.999999999999996 33.431457505076196 33.431457505076196 20.000000000000004 50 20 C 66.5685424949238 20 80 33.431457505076196 80 50 Z" transform="matrix(0, -1, 1, 0, 0, 100)" stroke-width="1" fill="none" fill-rule="evenodd"/><path d="M 22.525 17.073 L 22.525 17.073" style="" stroke=" black" fill=" none"/></svg>
+            <svg *ngIf="!finishB" xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                x="0px" y="0px" viewBox="0 0 96 96" style="enable-background:new 0 0 96 96;" xml:space="preserve"><style type="text/css">
+                .st0{fill:#020202;}
+                .st1{fill:none;stroke:#000000;stroke-width:6;stroke-linejoin:round;stroke-miterlimit:10;}
+                .st2{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:10;}
+            </style><switch><foreignObject requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/" x="0" y="0" width="1" height="1"/><g i:extraneous="self"><g><g><path d="M48,7C25.4,7,7,25.4,7,48s18.4,41,41,41s41-18.4,41-41S70.6,7,48,7z M48,87C26.5,87,9,69.5,9,48S26.5,9,48,9      s39,17.5,39,39S69.5,87,48,87z"/><path d="M68.5,33.2L40.9,60.7L27.5,47.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l14.1,14.1c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3      l28.3-28.3c0.4-0.4,0.4-1,0-1.4S68.9,32.8,68.5,33.2z"/></g></g></g></switch></svg><span>{{btLabel}}</span>
+
+        </a>
+    </div>
+
+    <table *ngIf="!finishB" mat-table [dataSource]="orders">
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef> Apartamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="person">
+            <th mat-header-cell *matHeaderCellDef> Responsável </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.person}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Telelefone </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.phone | mask: '(00) 0 0000-0000'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qtd">
+            <th mat-header-cell *matHeaderCellDef> Qtd de produtos </th>
+            <td mat-cell *matCellDef="let element"> {{element.orders.length}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> Visualizar </th>
+            <td mat-cell *matCellDef="let element">
+                <button class="btn-clean btn-clear-list" (click)="viewOrder(element)"><i class="far fa-eye"></i></button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="flex-row flex-center just-center">
+                    <select class="select" *ngIf="statusOrders" [disabled]="element.status === 'CANCELED'" [(ngModel)]="element.selectStatus">
+                        <option [value]="item.key" *ngFor="let item of statusOrders">{{item.value}}</option>
+                    </select>
+                    <button class="btn-clean btn-clear-list bt-confirm" (click)="element.selectStatus != element.status ? updateStatus(element.selectStatus, element) : ''">
+                        <span [hidden]="element.selectStatus === element.status || element.selectStatus === 'PENDING'">Confirmar</span>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <table *ngIf="finishB" mat-table [dataSource]="ordersCompleted">
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef> Apartamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="person">
+            <th mat-header-cell *matHeaderCellDef> Responsável </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.person}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Telelefone </th>
+            <td mat-cell *matCellDef="let element"> {{element.apartment.phone | mask: '(00) 0 0000-0000'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qtd">
+            <th mat-header-cell *matHeaderCellDef> Qtd de produtos </th>
+            <td mat-cell *matCellDef="let element"> {{element.orders.length}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> Visualizar </th>
+            <td mat-cell *matCellDef="let element">
+                <button class="btn-clean btn-clear-list" (click)="viewOrder(element)"><i class="far fa-eye"></i></button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsC"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsC;"></tr>
+    </table>
+    <mat-paginator *ngIf="finishB" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
