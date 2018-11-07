@@ -27,7 +27,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@mobiage/homescreen/src/module/styles/homescreen.style.scss",
+              "node_modules/@mobiage/homescreen/src/module/components/bullets/bullets.style.scss",
+              "node_modules/@mobiage/homescreen/src/module/components/cards/typeone/typeone.style.scss",
+              "node_modules/@mobiage/homescreen/src/module/components/charts/charts.style.scss"
             ],
             "scripts": []
           },
