@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     date.setHours(23,59,59,59)
     return date.getTime();
   }
-
+  //pensar uma forma melhor de observar os valores, da para fazer em uma so chamada.
   getTotal(homeScreenCallback) {
     this.db.collection('orders')
       .where('companyId', '==', this.tenant)
