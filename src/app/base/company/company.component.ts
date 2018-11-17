@@ -30,6 +30,16 @@ export class CompanyComponent implements OnInit {
     this.router.navigate(['/app/company/edit/' + uid]);
   }
 
+  formatPhone(phone) {
+    var numbers = phone.replace(/\D/g, ''),
+      char = { 0: '(', 2: ') ', 3: ' ', 7: '-' };
+    phone = '';
+    for (var i = 0; i < numbers.length; i++) {
+      phone += (char[i] || '') + numbers[i];
+    }
+    return phone
+  }
+
   getAllRecords() {
     this.ls.activeLoader();
     this.cs.getAll().then((resp: Array<CompanyElement>) => {

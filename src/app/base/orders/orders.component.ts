@@ -12,15 +12,15 @@ import { StatusOrder } from '../../interfaces/status-order.interface'
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  displayedColumns: any[] = ['number', 'person', 'phone', 'qtd', 'view', 'action']
-  displayedColumnsC: any[] = ['number', 'person', 'phone', 'qtd', 'view']
+  displayedColumns: any[] = ['cod', 'number', 'person', 'phone', 'qtd', 'view', 'action']
+  displayedColumnsC: any[] = ['cod', 'number', 'person', 'phone', 'qtd', 'status','view']
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private orders: MatTableDataSource<OrdersElement>
   private ordersCompleted: MatTableDataSource<OrdersElement>
-  private labelTitle: string
+  public labelTitle: string
   private finishB: boolean
-  private btLabel: string
+  public btLabel: string
 
   private htmlTeste: string
   public statusOrders: Array<any>
@@ -86,6 +86,14 @@ export class OrdersComponent implements OnInit {
     }
   }
 
+  translateLastStatus(status) {
+    if (status === StatusOrder.FINISH) {
+      return 'Finalizado'
+    } else {
+      return 'Cancelado'
+    }
+  }
+
   lastUpdateStatus(element) {
     if (element.status === StatusOrder.FINISH) {
       return StatusOrder.FINISH
@@ -141,18 +149,16 @@ export class OrdersComponent implements OnInit {
     `
     element.orders.forEach(item => {
       this.htmlTeste = this.htmlTeste + `
-     
         <h5>
           <strong>Produto:</strong> ${item.product.name},
           <strong>Qtd:</strong> ${item.qtd},
           <strong>SubTotal:</strong> R$ ${this.formatMoney(item.total)}
         </h5>
       `
-
       total += item.total
     });
+    this.htmlTeste = this.htmlTeste + `<h5><strong>Observação:</strong> ${element.description}</h5>`
     this.htmlTeste = this.htmlTeste + `</div>`
-
     this.htmlTeste = this.htmlTeste + `<h4>Total: R$ ${this.formatMoney(total)}</h4>`
     swal({
       title: `Informações sobre o pedido`,
@@ -188,6 +194,9 @@ export class OrdersComponent implements OnInit {
     }
 
     if (status === StatusOrder.CANCELED) {
+      data = {
+        status: StatusOrder.CANCELED,
+      }
       swal({
         title: 'Cancelando pedido',
         confirmButtonText: 'Enviar',

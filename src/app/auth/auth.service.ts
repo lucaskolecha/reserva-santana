@@ -130,6 +130,15 @@ export class AuthService {
       })
   }
 
+  forgotPassword(email) {
+    return new Promise((response:any) => {
+      this.fire.auth.sendPasswordResetEmail(email).then((resp) => {
+        console.log(resp)
+        response(resp)
+      })
+    })
+  }
+
   verifyPassword(pass, rePass) {
     return pass === rePass;
   }

@@ -39,14 +39,21 @@
         .middle-login {
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             input {
                 margin: 10px 0px;
                 height: 55px;
                 padding: 0px 25px;
                 border-radius: 50px;
                 border: 2px solid $whiteColor;
+                transition: transform 200ms ease;
                 &:focus {
                     border: 2px solid $primaryColor;
+                }
+                &.password {
+                    &.close {
+                        transform: translateX(-100%)
+                    }
                 }
             }
         }

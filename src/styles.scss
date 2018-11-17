@@ -64,7 +64,8 @@ form {
 
 a,
 button,
-input {
+input,
+textarea {
     &:active {
         background-image: none;
         outline: 0;
@@ -333,4 +334,9 @@ h1 {
         margin-bottom: 0px;
         text-align: left;
     }
+}
+
+.mh-container {
+    width: auto !important;
+    padding: 0;
 }

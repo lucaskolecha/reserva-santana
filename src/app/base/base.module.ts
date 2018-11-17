@@ -19,6 +19,7 @@ import { CoControlComponent } from './company/co-control/co-control.component'
 import { ProductsComponent } from './products/products.component'
 import { PrControlComponent } from './products/pr-control/pr-control.component'
 import { OrdersComponent } from './orders/orders.component'
+import { ProfileComponent } from './profile/profile.component'
 
 /* Services */
 import { NotificationService } from './services/notification.service'
@@ -29,7 +30,7 @@ import { ApartmentsService } from './apartments/apartments.service'
 import { ProductsService } from './products/products.service'
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ] ,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     FormsModule,
@@ -65,6 +66,11 @@ import { ProductsService } from './products/products.service'
             canActivate: [AuthGuard]
           },
           {
+            path: 'profile',
+            component: ProfileComponent,
+            canActivate: [AuthGuard]
+          },
+          {
             path: 'company',
             component: CompanyComponent,
             canActivate: [AuthGuard]
@@ -79,11 +85,11 @@ import { ProductsService } from './products/products.service'
             component: CoControlComponent,
             canActivate: [AuthGuard]
           },
-           {
-             path: 'orders',
-             component: OrdersComponent,
-             canActivate: [AuthGuard]
-           },
+          {
+            path: 'orders',
+            component: OrdersComponent,
+            canActivate: [AuthGuard]
+          },
           {
             path: 'products',
             component: ProductsComponent,
@@ -103,7 +109,7 @@ import { ProductsService } from './products/products.service'
       }
     ])
   ],
-  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent, OrdersComponent],
+  declarations: [HomeComponent, ApartmentsComponent, ApControlComponent, CompanyComponent, CoControlComponent, ProductsComponent, PrControlComponent, OrdersComponent, ProfileComponent],
   providers: [NotificationService, StorageService, OrdersService, CompanyService, ApartmentsService, ProductsService]
 })
 export class BaseModule { }

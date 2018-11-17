@@ -7,7 +7,7 @@
             </div>
             <div class="middle-login">
                 <input type="text" class="form-control" (focus)="clearError()" [(ngModel)]="email" placeholder="E-mail">
-                <input type="password" class="form-control" (focus)="clearError()" [(ngModel)]="password" placeholder="Senha">
+                <input type="password" class="form-control password" [ngClass]="{'close' : close}" (focus)="clearError()" [(ngModel)]="password" placeholder="Senha">
             </div>
             <div class="bottom-login">
                 <div class="row">
@@ -15,7 +15,7 @@
                         <div class="error-abs" id="error">
                             {{errorText}}
                         </div>
-                        <button type="button" id="login" [ngClass]="!loaderBtn ? 'loader' : ''" class="btn btn-sa btn-save" (click)="signIn()"><span [ngClass]="!loaderBtn ? 'loader' : ''">Logar</span>
+                        <button type="button" id="login" [ngClass]="!loaderBtn ? 'loader' : ''" class="btn btn-sa btn-save" (click)="close ? resetPassword() : signIn()"><span [ngClass]="!loaderBtn ? 'loader' : ''">{{close ? 'Enviar e-mail' : 'Logar'}}</span>
                                 <svg version="1.1" [ngClass]="!loaderBtn ? 'loader' : ''" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                     <path d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                                     <animateTransform attributeType="xml"
@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col text-center">
                         <p class="small-p not-m-bt m-t" style="margin-top: 30px;">
-                            <span (click)="SendResetPassword()" id="pass" class="link op1"> Esqueci minha senha </span>
+                            <span (click)="forgotPassword()" id="pass" class="link op1"> {{close ? 'voltar' : 'Esqueci minha senha'}} </span>
                         </p>
                     </div>
                 </div>

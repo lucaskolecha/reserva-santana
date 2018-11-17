@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import '@mobiage/homescreen';
 import { firestore } from 'firebase';
+import _ from 'underscore'
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,9 @@ export class HomeComponent implements OnInit {
               {
                 name: 'Realizado',
                 sync: (context) => {
-                  context.setValue(5);
+                  this.getChart((value) => {
+                    context.setValue(value)
+                  })
                 }
               }
             ]
@@ -42,7 +45,7 @@ export class HomeComponent implements OnInit {
               color: '#d3e000',
               sync: (context) => {
                 this.getTotal((value) => {
-                  context.setValue(value);
+                  context.setValue(value)
                 })
               }
             },
@@ -89,13 +92,13 @@ export class HomeComponent implements OnInit {
 
   getDateFirstHour() {
     const date = new Date();
-    date.setHours(0,0,0,0)
+    date.setHours(0, 0, 0, 0)
     return date.getTime();
   }
 
   getDateLastHour() {
     const date = new Date();
-    date.setHours(23,59,59,59)
+    date.setHours(23, 59, 59, 59)
     return date.getTime();
   }
   //pensar uma forma melhor de observar os valores, da para fazer em uma so chamada.
@@ -146,25 +149,36 @@ export class HomeComponent implements OnInit {
   }
 
   getChart(homeScreenCallback) {
-    // this.db.collection('metadata')
-    //   .doc(this.organizationCode)
-    //   .collection('dashboard')
-    //   .orderBy('createdAt', 'desc')
-    //   .limit(7)
-    //   .onSnapshot((response) => {
-    //     Promise.all(response.docs.map((doc) => doc.ref.collection('sales').get()))
-    //       .then((docsSnapshot) => {
-    //         let data = [];
-    //         docsSnapshot.reverse().forEach((docSnapshot: any, i) => {
-    //           const total = docSnapshot.docs.reduce((value, doc) => {
-    //             const data = doc.data();
-    //             return value + Number(data.value)
-    //           }, 0);
-    //           data[i] = total
-    //         })
-    //         homeScreenCallback(data)
-    //       })
-    //   })
+    this.db.collection('orders')
+      .where('companyId', '==', this.tenant)
+      .where('dateFinish', '>', this.getDateFromChart())
+      .where('dateFinish', '<', this.getDateLastHour())
+      .onSnapshot((response) => {
+        const toReturn = []
+        const group = this.groupOrders(response.docs.map((doc) => doc.data()))
+        Object.keys(group)
+          .forEach(date => {
+            const orders = group[date]
+            const total = orders.reduce((value, data) => value + Number(data.totalOrder), 0)
+            toReturn.push(total)
+          })
+        console.log(toReturn)
+        homeScreenCallback(toReturn)
+      })
+  }
+
+  groupOrders(arrayOfDates) {
+    return _.groupBy(arrayOfDates, function (el) {
+      const date = new Date(el.dateFinish)
+      date.setHours(0, 0, 0, 0)
+      return date.getTime()
+    });
+  }
+
+  getDateFromChart() {
+    const date = new Date()
+    date.setDate(date.getDate() - 7)
+    return date.getTime()
   }
 
 }

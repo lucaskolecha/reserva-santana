@@ -1,0 +1,42 @@
+<div class="profile-wrapper">
+    <div class="flex-row flex-center flex-between">
+        <h1>Perfil</h1>
+    </div>
+
+    <div class="flex-row">
+        <form autocomplete="off">
+            <div class="image">
+                <cp-image-crop cp-model="entity.image" crop="cropConfig"></cp-image-crop>
+            </div>
+            <input class="sa-input" placeholder="Nome da Empresa" name="name" [(ngModel)]="entity.name">
+            <input class="sa-input" placeholder="Telefone" name="phone" mask="(00) 0 0000-0000" [(ngModel)]="entity.phone">
+            <div class="input-group-flex">
+                <input class="sa-input" placeholder="Abre as" name="open" mask="00:00" [(ngModel)]="entity.open">
+                <input class="sa-input" placeholder="Fecha as" name="close" mask="00:00" [(ngModel)]="entity.close">
+            </div>
+            <input class="sa-input" [disabled]="true" placeholder="E-mail" name="email" [(ngModel)]="entity.email">
+            <input type="password" class="sa-input" placeholder="Senha" name="password" id="password" [(ngModel)]="entity.password">
+            <input type="password" class="sa-input" placeholder="Repetir Senha" name="repassword" [(ngModel)]="rePassword">
+            <div class="flex-row">
+                <input type="checkbox" [(ngModel)]="entity.closeOrders" name="closeOrders" value="closeOrders"> <label for="closeOrders">Fechado para pedidos online</label>
+            </div>
+            <div class="flex-right">
+                <button type="button" [ngClass]="!loaderBtn ? 'loader' : ''" class="btn btn-sa btn-save" [disabled]="disableButton()" (click)="saveCompany()"><span [ngClass]="!loaderBtn ? 'loader' : ''">Salvar</span>
+                    <svg version="1.1" [ngClass]="!loaderBtn ? 'loader' : ''" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <path d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                        <animateTransform attributeType="xml"
+                         attributeName="transform"
+                         type="rotate"
+                         from="0 25 25"
+                         to="360 25 25"
+                         dur="0.6s"
+                         repeatCount="indefinite"/>
+                        </path>
+                        </svg>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

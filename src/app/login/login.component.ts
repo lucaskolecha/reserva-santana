@@ -8,14 +8,18 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  private email: string;
-  private password: any;
-  public loaderBtn: boolean = true;
-  public errorText: String = '';
+  private email: string
+  private password: any
+  public loaderBtn: boolean
+  public errorText: String
+  public close: boolean
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.loaderBtn = true
+    this.close = false
+    this.errorText = ''
   }
 
   clearError () {
@@ -37,6 +41,16 @@ export class LoginComponent implements OnInit {
       this.errorText = this.authService.translateLoginError();
       this.loaderBtn = true;
     });
+  }
+
+  forgotPassword() {
+    this.close = !this.close
+  }
+
+  resetPassword() {
+    this.authService.forgotPassword(this.email).then((teste) => {
+      console.log('tela',teste)
+    })
   }
 
 }

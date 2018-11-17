@@ -23,8 +23,9 @@ export class BaseComponent implements OnInit {
     }
     
     this.navbar = [
-      { name: 'Início', icon: 'fas fa-home', link: '/app/home', user: 'SYNDICATE' },
+      { name: 'Início', icon: 'fas fa-home', link: '/app/home', user: 'COMPANY' },
       { name: 'Apartamentos', icon: 'fas fa-building', link: '/app/apartments', user: 'SYNDICATE' },
+      { name: 'Perfil', icon: 'far fa-user', link: '/app/profile', user: 'COMPANY' },
       { name: 'Empresas', icon: 'fas fa-industry', link: '/app/company', user: 'SYNDICATE' },
       { name: 'Pedidos', icon: 'fas fa-paperclip', link: '/app/orders', user: 'COMPANY' },
       { name: 'Produtos', icon: 'fas fa-box-open', link: '/app/products', user: 'COMPANY' }

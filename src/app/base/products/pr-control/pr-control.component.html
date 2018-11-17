@@ -26,6 +26,9 @@
                     <li class="item" (click)="setCategory(item.category)" *ngFor="let item of options">{{item.category}}</li>
                 </ul>
             </div>
+            <div class="col-md-12 flex-row">
+                <textarea class="sa-textarea" rows="5" name="description" [(ngModel)]="entity.description" placeholder="Descrição do produto"></textarea>
+            </div>
             <div class="col-md-12 margin-input">
                 <div class="group-switch">
                     <label class="label-rs">Por Kg</label>

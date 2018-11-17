@@ -34,6 +34,7 @@
     "ngx-toggle-switch": "^2.0.5",
     "rxjs": "^6.0.0",
     "sweetalert2": "^7.28.1",
+    "underscore": "^1.9.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
