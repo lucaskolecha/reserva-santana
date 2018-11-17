@@ -8,8 +8,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  private email: string
-  private password: any
+  public email: string
+  public password: any
   public loaderBtn: boolean
   public errorText: String
   public close: boolean

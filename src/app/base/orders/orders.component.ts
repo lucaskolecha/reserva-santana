@@ -16,16 +16,16 @@ export class OrdersComponent implements OnInit {
   displayedColumnsC: any[] = ['cod', 'number', 'person', 'phone', 'qtd', 'status','view']
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  private orders: MatTableDataSource<OrdersElement>
-  private ordersCompleted: MatTableDataSource<OrdersElement>
+  public orders: MatTableDataSource<OrdersElement>
+  public ordersCompleted: MatTableDataSource<OrdersElement>
   public labelTitle: string
-  private finishB: boolean
+  public finishB: boolean
   public btLabel: string
 
-  private htmlTeste: string
+  public htmlTeste: string
   public statusOrders: Array<any>
-  private unsnapshotsOpen: Array<any>
-  private unsnapshotsClose: Array<any>
+  public unsnapshotsOpen: Array<any>
+  public unsnapshotsClose: Array<any>
 
   constructor(private ordersService: OrdersService,
     private notif: NotifierService,

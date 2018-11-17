@@ -15,7 +15,7 @@ export class PrControlComponent implements OnInit {
   public opts: boolean = false
   public options: Array<Object>
 
-  private entity: any = {
+  public entity: any = {
     kilogram: false,
     date: new Date().getTime(),
     image: 'assets/images/logo.png'

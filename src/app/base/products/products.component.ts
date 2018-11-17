@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 })
 export class ProductsComponent implements OnInit {
   displayedColumns: any[] = ['name', 'category', 'unit', 'price', 'action'];
-  private dataSource: MatTableDataSource<ProductsElement>;
+  public dataSource: MatTableDataSource<ProductsElement>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

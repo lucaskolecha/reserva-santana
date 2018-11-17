@@ -11,11 +11,11 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  private entity: any
-  private uid: string
-  private rePassword: string
+  public entity: any
+  public uid: string
+  public rePassword: string
   public loaderBtn:boolean
-  private oldEntity: any
+  public oldEntity: any
 
   constructor(private router: Router, public companyService: CompanyService, private as: AuthService, private notif: NotifierService) {
     this.entity = {}

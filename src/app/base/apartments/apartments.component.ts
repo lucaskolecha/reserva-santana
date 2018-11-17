@@ -12,7 +12,7 @@ import { LoaderService } from '../loader.service';
 })
 export class ApartmentsComponent implements OnInit {
   displayedColumns: any[] = ['number', 'person', 'email', 'action'];
-  private dataSource: MatTableDataSource<ApartmentElement>;
+  public dataSource: MatTableDataSource<ApartmentElement>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

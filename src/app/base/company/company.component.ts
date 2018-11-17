@@ -12,7 +12,7 @@ import { LoaderService } from '../loader.service';
 })
 export class CompanyComponent implements OnInit {
   displayedColumns: any[] = ['name', 'phone', 'email', 'action'];
-  private dataSource: MatTableDataSource<CompanyElement>;
+  public dataSource: MatTableDataSource<CompanyElement>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
