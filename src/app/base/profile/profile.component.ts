@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public entity: any
   public uid: string
   public rePassword: string
-  public loaderBtn:boolean
+  public loaderBtn: boolean
   public oldEntity: any
 
   constructor(private router: Router, public companyService: CompanyService, private as: AuthService, private notif: NotifierService) {
@@ -33,25 +33,25 @@ export class ProfileComponent implements OnInit {
 
   validadePassword() {
     let resp: boolean
-    if (!this.uid) {
-      resp = this.as.verifyPassword(this.entity.password, this.rePassword);
-      if (!resp) {
-        this.entity.password = ''
-        this.rePassword = ''
-        document.getElementById('password').focus();
-      }
-      return resp
+    resp = this.as.verifyPassword(this.entity.password, this.rePassword);
+    if (!resp) {
+      this.entity.password = ''
+      this.rePassword = ''
+      document.getElementById('password').focus();
     }
+    return resp
   }
 
   saveCompany() {
-    if (!this.uid && !this.validadePassword()) {
+    if (this.entity.password && !this.validadePassword()) {
       this.notif.notify('error', 'Campo Senha e Repetir Senha estão diferentes.')
       return
     }
     this.loaderBtn = false
-    this.companyService.saveCompany(this.uid, this.entity, this.oldEntity).then((resp) => {
+    this.companyService.saveCompany(this.uid, this.entity, this.oldEntity).then(() => {
+      this.router.navigate(['/app/profile'])
       this.loaderBtn = true
+      
     }).catch((err) => {
       this.as.translateError(err);
       this.loaderBtn = true;

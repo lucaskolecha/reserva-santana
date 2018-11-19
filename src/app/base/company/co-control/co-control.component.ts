@@ -29,21 +29,23 @@ export class CoControlComponent implements OnInit {
       if (params.uid) {
         this.coService.getOne(params.uid).then((resp: any) => {
           if (resp) {
-            this.entity.name = resp.name || null;
-            this.entity.phone = resp.phone || null;
-            this.entity.open = resp.open || null;
-            this.entity.close = resp.close || null;
-            this.entity.email = resp.email || null;
-            this.entity.password = resp.password || null;
-            this.entity.image = resp.image || 'assets/images/logo.jpeg';
-            this.oldEntity = Object.assign({}, this.entity);
-            this.uid = params.uid;
+            this.entity.name = resp.name || null
+            this.entity.phone = resp.phone || null
+            this.entity.open = resp.open || null
+            this.entity.close = resp.close || null
+            this.entity.email = resp.email || null
+            this.entity.password = resp.password || null
+            this.entity.image = resp.image || 'assets/images/logo.jpeg'
+            this.oldEntity = Object.assign({}, this.entity)
+            this.uid = params.uid
           } else {
             this.router.navigate(['/app/company']);
           }
         }).catch((e) => {
           console.error(e);
         });
+      } else { 
+        this.entity.closeOrders = false
       }
     });
   }
@@ -105,6 +107,7 @@ export class CoControlComponent implements OnInit {
       this.entity.image = null;
     }
     this.coService.saveCompany(this.uid, this.entity, this.oldEntity).then(() => {
+      this.router.navigate(['/app/company'])
       if (this.uid) {
         this.notif.notify('success', 'Uhull, empresa alterada com sucesso!!!');
       } else {

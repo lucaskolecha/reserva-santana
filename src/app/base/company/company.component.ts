@@ -60,9 +60,6 @@ export class CompanyComponent implements OnInit {
       confirmButtonText: 'SIM',
       cancelButtonText: 'Não',
       preConfirm: () => {
-        // this.co.removeCompany(entity).then(() => {
-        //   this.getAllRecords();
-        // });
         this.cs.deleteUser(entity.uid).then(() => {
           this.getAllRecords();
         });

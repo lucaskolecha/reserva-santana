@@ -42,7 +42,6 @@ export class OrdersService {
     }
 
     updateRecord(data, id) {
-        console.log(data)
         return new Promise((response, reject) => {
             this.db.collection(Constants.COLLECTION_ORDERS).doc(id).update(JSON.parse(JSON.stringify(data))).then(() => {
                 response(true)

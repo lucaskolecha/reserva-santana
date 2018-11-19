@@ -10,14 +10,16 @@ import _ from 'underscore'
 })
 export class HomeComponent implements OnInit {
 
-  public dashConfig: any;
-  private db: any;
-  private tenant: string;
+  public dashConfig: any
+  private db: any
+  private tenant: string
+  private typeUser: string
 
   constructor() {
     this.db = firestore();
     this.db.settings({ timestampsInSnapshots: true });
-    this.tenant = sessionStorage.getItem('tokenUid');
+    this.tenant = sessionStorage.getItem('tokenUid')
+    this.typeUser = sessionStorage.getItem('typeUser')
   }
 
   ngOnInit() {

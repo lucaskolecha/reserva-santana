@@ -16,7 +16,7 @@ export class NotificationService {
         if (status === StatusOrder.VISUALIZED) {
             message = `Opa, acabamos de visualizar seu pedido!`
         } else if (status === StatusOrder.SENT) {
-            message = `Nosso entregador acabou de sair para realizar sua entrega.`
+            message = `Nosso entregador acabou de sair...`
         } else if (status === StatusOrder.CANCELED) {
             message = text
         } else if (status === StatusOrder.FINISH) {
@@ -24,6 +24,7 @@ export class NotificationService {
         }
         let data = {
             include_player_ids: [idDevice],
+            // big_picture: `https://media1.britannica.com/eb-media/02/188002-004-58D1B5AE.jpg`,
             headings: {
                 en: `${company} diz:`
             },

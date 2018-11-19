@@ -85,18 +85,22 @@ export class CompanyService {
   saveCompany(uid, entity, oldEntity) {
     return new Promise((response, reject) => {
       if (uid) {
-        this.editUserAuth(oldEntity, entity).then(() => {
+        if (entity.password) {
+          this.editUserAuth(oldEntity, entity).then(() => {
+            this.db.collection(Constants.COLLECTION_COMPANIES).doc(uid).update(entity).then(() => {
+              response(entity)
+            })
+          }).catch((err) => {
+            reject(err.error.error)
+          })
+        } else {
           this.db.collection(Constants.COLLECTION_COMPANIES).doc(uid).update(entity).then(() => {
-            this.router.navigate(['/app/company']);
-            response(entity);
-          });
-        }).catch((err) => {
-          reject(err.error.error);
-        });
+            response(entity)
+          })
+        }
       } else {
         this.saveUserAuth(entity).then(() => {
           this.db.collection(Constants.COLLECTION_COMPANIES).doc().set(entity).then(() => {
-            this.router.navigate(['/app/company']);
             response(entity);
           });
         }).catch((err) => {
